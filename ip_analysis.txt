@@ -1,0 +1,36 @@
+### PCAP Analysis Report
+
+**General Information from PCAP:**
+- **Source IP:** 192.168.2.61
+- **Destination IP:** 142.251.32.78
+- **Traffic Protocol:** QUIC over UDP
+
+**QUIC Protocol Usage:**
+- QUIC frames with Initial and Short headers observed.
+- Packet decryption failed (possibly encrypted with missing keys).
+
+**Ethernet Frame Analysis:**
+- **Destination MAC:** c8:e2:65:48:73:b2 (Intel Corporate)
+- **Source MAC:** 34:5d:9e:eb:0c:9a (Sagemcom Broadband SAS)
+
+**Traffic Direction:**
+- Predominantly towards port 443 indicating HTTPS/QUIC usage.
+
+**Packet Characteristics:**
+- Mixed packet lengths indicating data and control signals.
+- High frequency of packet exchange with microsecond time deltas.
+
+### Additional Analysis of Destination IP (142.251.32.78)
+
+- **DNS Lookup:** Host resolved to yyz12s07-in-f14.1e100.net.
+- **HTTP Check:** Responds with HTTP status unknown. Redirection to http://www.google.com/
+- **Ping:** Average latency of 132.961 ms, 0% packet loss.
+- **WHOIS:** Owned by Google LLC, in the US, ASN 15169.
+- **Reverse DNS:** yyz12s07-in-f14.1e100.net.
+- **BGP Info:** Part of ASN 15169 (Google) in prefix 142.251.32.0/24.
+- **Traceroute:** Direct with 2 hops ending at 142.251.32.78.
+- **Threat Check:** Blacklisted (Abuse Score 0), but no reported threats.
+- **Geolocation:** Toronto, Ontario, Canada (Lat: 43.6532, Lon: -79.3832).
+
+### Conclusion
+The destination IP is a Google-operated address primarily associated with secure communication via QUIC protocol. It does not pose threat activity but interestingly appears on a blacklist with no further reports. Location traced back to Toronto, Canada.
