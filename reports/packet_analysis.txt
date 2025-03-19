@@ -1,0 +1,48 @@
+## Packet Capture Analysis Report
+
+### Frame Layer
+- **Frame Number:** 1
+- **Capture Length:** 402 bytes
+- **Encapsulation Type:** Ethernet (1)
+- **Protocols in Frame:** Ethernet, IP, UDP, Data
+- **Time Captured:** September 5, 2023, 21:05:11 UTC
+
+### Ethernet Layer
+- **Destination MAC Address:** 34:5d:9e:eb:0c:9b (Sagemcom Broadband SAS)
+- **Source MAC Address:** c8:e2:65:48:73:b2 (Intel Corporate)
+- **Ethernet Type:** IPv4 (0x0800)
+
+### IP Layer
+- **Version:** IPv4
+- **Header Length:** 20 bytes
+- **Total Length:** 388 bytes
+- **Source IP Address:** 192.168.2.61
+- **Destination IP Address:** 170.72.169.30
+- **Protocol:** UDP (17)
+- **Time To Live (TTL):** 128
+
+### UDP Layer
+- **Source Port:** 52762
+- **Destination Port:** 9000
+- **Length:** 368 bytes
+- **Checksum:** 0x17ce
+
+### Data Layer
+- **Data Length:** 360 bytes
+
+### Detailed Analysis
+The captured packet is a UDP packet traveling from the local IP (192.168.2.61) to a remote IP (170.72.169.30) using port 9000, transmitted over a Wi-Fi network from a device with an Intel network card. The TTL value suggests it originated from a Windows device.
+
+### IP Address Analysis
+- **Geo-location IP 170.72.169.30:** San Jose (North San Jose), California, United States
+- **WHOIS Info:**
+  - **Organization:** Cisco Webex LLC
+  - **Network Range:** 170.72.0.0 - 170.72.255.255
+  - **ASN:** AS13445, AS16509, AS14618
+- **Threat Check:** Not Blacklisted (Abuse Score: 0/100)
+
+### Conclusion
+The packet appears to be a non-malicious UDP communication associated with activities such as streaming or gaming. The destination IP belongs to Cisco Webex LLC, indicating a potential legitimate usage of network services.
+
+### Recommendations
+No immediate action required as no threats were detected.
