@@ -1,1 +1,0 @@
-Overall device health in Atlanta: 65 healthy devices, 5 failing devices.  See detailed report for more information.
