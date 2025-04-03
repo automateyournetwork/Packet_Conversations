@@ -1,0 +1,1 @@
+Summary for device S3 health: Device S3 is reported as failing and in violation. Interface et-1/1/121 shows anomalies potentially related to the link with L121 (et-1/1/3). Both devices use the same transceiver model (apic_1), suggesting a possible shared fault. Anomalies in traffic and operational status might indicate a sync or configuration issue.
