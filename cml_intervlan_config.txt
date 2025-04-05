@@ -1,0 +1,37 @@
+# --- SW1 Configuration ---
+configure terminal
+ interface Ethernet0/2
+  description Trunk to R1 Eth0/0
+  switchport trunk encapsulation dot1q
+  switchport mode trunk
+  switchport trunk allowed vlan 10,20
+  no shutdown
+ spanning-tree mode rapid-pvst
+end
+
+# --- R1 Configuration ---
+configure terminal
+ interface Ethernet0/0
+  no shutdown
+ interface Ethernet0/0.10
+  description Link to SW1 VLAN 10
+  encapsulation dot1Q 10
+  ip address 10.10.10.1 255.255.255.0
+ interface Ethernet0/0.20
+  description Link to SW1 VLAN 20
+  encapsulation dot1Q 20
+  ip address 10.10.30.1 255.255.255.0
+ ip routing
+end
+
+# --- PC1 Linux Configuration ---
+sudo ip addr flush dev eth0
+sudo ip addr add 10.10.10.100/24 dev eth0
+sudo ip link set eth0 up
+sudo ip route add default via 10.10.10.1
+
+# --- PC2 Linux Configuration ---
+sudo ip addr flush dev eth0
+sudo ip addr add 10.10.30.100/24 dev eth0
+sudo ip link set eth0 up
+sudo ip route add default via 10.10.30.1
