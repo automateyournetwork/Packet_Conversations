@@ -1,0 +1,1 @@
+This was a message in slack that Gemini used MCP to read and act upon
