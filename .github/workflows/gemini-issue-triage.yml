@@ -1,17 +1,22 @@
 name: Gemini PCAP Report
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
+  issue_comment:
+    types: [created]
 
 jobs:
   analyze_pcap:
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '/pcap-report'))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - name: Run Gemini CLI with PCAP prompt
-        uses: google-github-actions/run-gemini-cli@v1
         id: gemini_output
+        uses: google-github-actions/run-gemini-cli@v1
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
           prompt: |
@@ -20,10 +25,11 @@ jobs:
             (Ethernet MACs, IPs, and ports) in a labeled Markdown file.
 
       - name: Save response to report.md
-        run: |
-          echo "${{ steps.gemini_output.outputs.response }}" > report.md
+        run: echo "${{ steps.gemini_output.outputs.summary }}" > report.md
 
       - name: Commit the report
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
