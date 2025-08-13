@@ -274,10 +274,10 @@ jobs:
                    - `git commit -m "feat: <describe the fix>"`
                    - `git push origin issue/${ISSUE_NUMBER}/my-fix`
                    - After pushing, you can create a pull request: `gh pr create --title "Fixes #${ISSUE_NUMBER}: <short title>" --body "This PR addresses issue #${ISSUE_NUMBER}."`
-               - Summarize what was changed and why in a markdown file: `write_file("${GITHUB_WORKSPACE:-$PWD}/response.md", "<your response here>")`
+               - Summarize what was changed and why in a markdown file: `write_file("${{ github.workspace }}/response.md", "<your response here>")`
                - Post the response as a comment:
-                 - For PRs: `gh pr comment "${ISSUE_NUMBER}" --body-file ${GITHUB_WORKSPACE:-$PWD}/response.md`
-                 - For Issues: `gh issue comment "${ISSUE_NUMBER}" --body-file ${GITHUB_WORKSPACE:-$PWD}/response.md`
+                 - For PRs: `gh pr comment "${ISSUE_NUMBER}" --body-file ${{ github.workspace }}/response.md`
+                 - For Issues: `gh issue comment "${ISSUE_NUMBER}" --body-file ${{ github.workspace }}/response.md`
 
             2. **Addressing Comments on a Pull Request**
                - Read the specific comment and the context of the PR.
@@ -288,13 +288,13 @@ jobs:
                  - `git commit -m "fix: address review comments"`
                  - `git push`
                - If the comment is a question, answer it directly and clearly, referencing code or documentation as needed.
-               - Document your response in `response.md` and post it as a PR comment: `gh pr comment "${ISSUE_NUMBER}" --body-file ${GITHUB_WORKSPACE:-$PWD}/response.md`
+               - Document your response in `response.md` and post it as a PR comment: `gh pr comment "${ISSUE_NUMBER}" --body-file ${{ github.workspace }}/response.md`
 
             3. **Answering Any Question on an Issue**
                - Read the question and the full issue context using `gh issue view` and related tools.
                - Research or analyze the codebase as needed to provide an accurate answer.
                - If the question requires code or documentation changes, follow the fix process above, including creating and updating a checklist plan and **creating a new branch for your changes as described in section 1.**
-               - Write a clear, concise answer in `response.md` and post it as an issue comment: `gh issue comment "${ISSUE_NUMBER}" --body-file ${GITHUB_WORKSPACE:-$PWD}/response.md`
+               - Write a clear, concise answer in `response.md` and post it as an issue comment: `gh issue comment "${ISSUE_NUMBER}" --body-file ${{ github.workspace }}/response.md`
 
             ## Guidelines
 
