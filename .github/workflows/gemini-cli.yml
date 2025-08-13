@@ -186,6 +186,11 @@ jobs:
             echo "EOF"
           } >> "${GITHUB_OUTPUT}"
 
+      - name: Install Gemini CLI
+        run: |
+          curl -sSL https://install.gemini-cli.dev | bash
+          export PATH="$HOME/.gemini/bin:$PATH"
+
       - name: 'Run Gemini'
         id: 'run_gemini'
         uses: 'google-github-actions/run-gemini-cli@v0'
