@@ -227,6 +227,9 @@ jobs:
             - **Comments**:
             `${{ steps.get_comments.outputs.comments }}`
 
+            ## SHELL SAFETY (hard requirements)
+            - DO NOT use command substitution or process substitution: **no** `$()`, backticks ``` `...` ```, `<()`, or `>()`.
+
             ## User Request
 
             The user has sent the following request:
