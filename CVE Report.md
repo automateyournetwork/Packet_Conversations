@@ -4,6 +4,16 @@ Date: July 22, 2025
 ## Executive Summary
 Security vulnerability assessment revealed multiple critical and high-severity CVEs affecting network infrastructure, particularly in Juniper devices. Other vendors' equipment (Cisco and Arista) show no immediate vulnerabilities but require continued monitoring.
 
+## CVE Summary Table
+
+| CVE ID | Severity | Description | Impact | Recommended Fix |
+| --- | --- | --- | --- | --- |
+| CVE-2025-21600 | HIGH (CVSS 4.0 Score: 7.1) | Out-of-Bounds Read vulnerability in routing protocol daemon (rpd) | Denial of Service (DoS) through BGP | Update to latest patched versions per version stream |
+| CVE-2023-44197 | HIGH (CVSS 3.1 Score: 7.5) | Out-of-Bounds Write vulnerability in rpd | Denial of Service through BGP route processing | Update to patched versions |
+| CVE-2024-30391 | MEDIUM (CVSS 3.1 Score: 4.8) | Missing Authentication for Critical Function in PFE | Affects IPsec authentication with hmac-sha-384/512 | Update to patched versions |
+| CVE-2022-22171 | HIGH (CVSS 3.1 Score: 7.5) | Improper Check for Exceptional Conditions in PFE | DoS through VXLAN packet processing | Update to patched versions |
+| CVE-2022-22168 | MEDIUM (CVSS 3.1 Score: 6.5) | Improper Validation vulnerability in kernel | Memory leak leading to FPC reboot | Update to patched versions |
+
 ## Detailed Findings by Vendor
 
 ### Juniper Devices
