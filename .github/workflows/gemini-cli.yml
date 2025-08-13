@@ -188,7 +188,7 @@ jobs:
 
       - name: Install Gemini CLI
         run: |
-          curl -sSL https://install.gemini-cli.dev | bash
+          npm install -g @google/gemini-cli | bash
           export PATH="$HOME/.gemini/bin:$PATH"
 
       - name: 'Run Gemini'
