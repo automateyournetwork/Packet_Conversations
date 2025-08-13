@@ -1,0 +1,32 @@
+name: Gemini PCAP Report
+
+on:
+  workflow_dispatch:
+
+jobs:
+  analyze_pcap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Gemini CLI with PCAP prompt
+        uses: google-github-actions/run-gemini-cli@v1
+        id: gemini_output
+        with:
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          prompt: |
+            Please analyze the capture.pcap file with Packet Copilot and
+            create a report identifying the source and destination at L2–L4
+            (Ethernet MACs, IPs, and ports) in a labeled Markdown file.
+
+      - name: Save response to report.md
+        run: |
+          echo "${{ steps.gemini_output.outputs.response }}" > report.md
+
+      - name: Commit the report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add report.md
+          git commit -m "Add PCAP analysis report"
+          git push
