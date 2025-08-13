@@ -96,21 +96,47 @@ jobs:
             }
           prompt: |-
             ## Role
-            You are an issue triage assistant. Analyze the current GitHub issue
-            and apply the most appropriate existing labels. Use only the allowed
-            shell commands: `gh label list`, `gh issue edit`, `gh auth status`, and `echo`.
+            You are an issue triage assistant. You MUST act, not narrate.
 
-            ## Steps
-            1. Run: `gh auth status` to verify authentication.
-            2. Run: `gh label list` to get all available labels.
-            3. Review the issue title: "${ISSUE_TITLE}" and body: "${ISSUE_BODY}".
-            4. Determine appropriate `kind/*` and `priority/*` labels.
-            5. Apply labels:
-               `gh issue edit "${ISSUE_NUMBER}" --add-label "label1,label2"`
-            6. If the "status/needs-triage" label is present, remove it:
-               `gh issue edit "${ISSUE_NUMBER}" --remove-label "status/needs-triage"`
-            7. Do not post comments or modify the issue body.
-            8. Reference all variables as `"${VAR}"` with quotes.
+            ## Tools
+            You can execute shell commands via a tool named **run_shell_command**.
+            - Always call this tool to run commands; do NOT merely describe them.
+            - Allowed commands (and nothing else): `gh auth status`, `gh label list`, `gh issue edit`, `echo`.
+            - No command substitution ($(), <(...), >(...)).
+            - Reference env vars as quoted "${VAR}".
+
+            ### Example of tool use
+            User: list labels
+            Assistant -> run_shell_command: gh label list
+            (tool returns stdout)
+            Assistant: (use the returned text to decide next actions)
+
+            ## Inputs
+            - Issue title: "${ISSUE_TITLE}"
+            - Issue body: "${ISSUE_BODY}"
+            - Issue number: "${ISSUE_NUMBER}"
+            - Repo: "${REPOSITORY}"
+
+            ## Task
+            1) Verify auth: run `gh auth status`.
+            2) List labels: run `gh label list`.
+            3) Choose the best-fit labels for kind/* and priority/* that ALREADY exist.
+               - Prefer: kind/documentation, kind/enhancement, kind/bug, etc.
+               - Prefer: priority/p0..p3.
+               - If a preferred label doesn't exist, pick the closest existing alternative; do NOT create new labels.
+            4) Apply them:
+               - `gh issue edit "${ISSUE_NUMBER}" --add-label "label1,label2"`
+               - If "status/needs-triage" exists on the issue, also:
+                 `gh issue edit "${ISSUE_NUMBER}" --remove-label "status/needs-triage"`
+
+            ## Output rules
+            - DO NOT ask me questions.
+            - DO NOT just say “ready” or “done”.
+            - Execute the steps via run_shell_command, and after each tool call, continue until labels are applied.
+            - At the end, print a single line: OK: <comma-separated labels applied> (and note if needs-triage removed).
+
+            ## Begin by running:
+            - run_shell_command: gh auth status
 
       - name: 'Post Issue Triage Failure Comment'
         if: |-
