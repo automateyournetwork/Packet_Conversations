@@ -186,10 +186,6 @@ jobs:
             echo "EOF"
           } >> "${GITHUB_OUTPUT}"
 
-      - name: Install Gemini CLI
-        run: |
-          npm install -g @google/gemini-cli | bash
-
       - name: 'Run Gemini'
         id: 'run_gemini'
         uses: 'google-github-actions/run-gemini-cli@v0'
