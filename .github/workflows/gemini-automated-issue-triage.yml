@@ -114,7 +114,8 @@ jobs:
                `gh issue edit "${ISSUE_NUMBER}" --add-label "label1,label2"`
             5. If the "status/needs-triage" label is present, remove it using:
                `gh issue edit "${ISSUE_NUMBER}" --remove-label "status/needs-triage"`
-
+            6. TERMINATE by printing a single line via echo:
+               `echo 'OK: label1,label2[; removed=status/needs-triage]'`
             ## Guidelines
 
             - Only use labels that already exist in the repository
@@ -122,6 +123,7 @@ jobs:
             - Triage only the current issue
             - Assign all applicable labels based on the issue content
             - Reference all shell variables as "${VAR}" (with quotes and braces)
+            - Make sure you stop gracefully after applying labels
 
       - name: 'Post Issue Triage Failure Comment'
         if: |-
