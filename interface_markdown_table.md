@@ -1,3 +1,16 @@
+### Interface Analysis
+
+Here is a summary of the interfaces on device R3:
+
+*   **Total Interfaces:** 18
+*   **Up Interfaces:** 16
+*   **Administratively Down Interfaces:** 1
+*   **Down Interfaces (Protocol):** 1
+*   **Interfaces with IP Addresses:** 10
+*   **Interfaces without IP Addresses:** 8
+
+### Interface Details
+
 | Interface | IP Address | Status | Protocol |
 | :--- | :--- | :--- | :--- |
 | Vlan1 | unassigned | up | up |
